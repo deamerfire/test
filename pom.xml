@@ -7,6 +7,49 @@
     <groupId>mi</groupId>
     <artifactId>wuqiong</artifactId>
     <version>1.0-SNAPSHOT</version>
+<build>
+<plugins>
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <executions>
+            <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>assemble</goal>
+                </goals>
+            </execution>
+        </executions>
+        <configuration>
+            <configurationDirectory>conf</configurationDirectory>
+            <configurationSourceDirectory>conf</configurationSourceDirectory>
+            <copyConfigurationDirectory>true</copyConfigurationDirectory>
+            <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
 
+            <repositoryLayout>flat</repositoryLayout>
+            <repositoryName>lib</repositoryName>
 
+            <assembleDirectory>${project.build.directory}/${project.artifactId}-${project.version}</assembleDirectory>
+
+            <binFileExtensions>
+                <unix>.sh</unix>
+            </binFileExtensions>
+            <platforms>
+                <platform>unix</platform>
+            </platforms>
+
+            <extraJvmArguments>-Djava.security.krb5.conf=$BASEDIR/conf/krb5.conf</extraJvmArguments>
+
+            <programs>
+                <program>
+                    <mainClass>Resquence</mainClass>
+                    <name>Resquence</name>
+                </program>
+            </programs>
+        </configuration>
+    </plugin>
+</plugins>
+</build>
 </project>
